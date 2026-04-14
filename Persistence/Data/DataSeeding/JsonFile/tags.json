@@ -1,0 +1,9 @@
+[
+  { "Id": 1, "Name": "CSharp" },
+  { "Id": 2, "Name": "ASP.NET" },
+  { "Id": 3, "Name": "EntityFramework" },
+  { "Id": 4, "Name": "WebAPI" },
+  { "Id": 5, "Name": "SQL" },
+  { "Id": 6, "Name": "UI" },
+  { "Id": 7, "Name": "Tips" }
+]

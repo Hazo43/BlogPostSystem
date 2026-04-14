@@ -12,8 +12,8 @@ using Persistence.Data.DbContexts;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20260413162243_AllTablesBlogSystemFixed")]
-    partial class AllTablesBlogSystemFixed
+    [Migration("20260414140823_AllTablesInBlogPost")]
+    partial class AllTablesInBlogPost
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,7 +110,7 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Contect")
+                    b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

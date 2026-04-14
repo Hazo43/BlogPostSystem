@@ -9,7 +9,7 @@ namespace Domain.Entites
     public class Comment : BaseEntity<int>
     {
 
-        public string Contect { get; set; } = string.Empty;
+        public string Content { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
 
         #region Relations

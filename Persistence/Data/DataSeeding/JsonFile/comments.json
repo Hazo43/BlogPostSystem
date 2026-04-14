@@ -1,0 +1,37 @@
+[
+  {
+    "Id": 1,
+    "Content": "Great article! Really helped me understand ASP.NET Core.",
+    "PostId": 1,
+    "AuthorId": 4,
+    "CreatedAt": "2024-01-11T10:00:00"
+  },
+  {
+    "Id": 2,
+    "Content": "Can you cover middleware in the next post?",
+    "PostId": 1,
+    "AuthorId": 5,
+    "CreatedAt": "2024-01-12T12:00:00"
+  },
+  {
+    "Id": 3,
+    "Content": "The part about lazy loading was very useful, thanks!",
+    "PostId": 2,
+    "AuthorId": 4,
+    "CreatedAt": "2024-02-07T09:00:00"
+  },
+  {
+    "Id": 4,
+    "Content": "I had the same issue with N+1 queries, this fixed it.",
+    "PostId": 2,
+    "AuthorId": 5,
+    "CreatedAt": "2024-02-08T11:30:00"
+  },
+  {
+    "Id": 5,
+    "Content": "Best REST API tutorial I have found so far!",
+    "PostId": 3,
+    "AuthorId": 4,
+    "CreatedAt": "2024-03-02T15:00:00"
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "Id": 1,
+    "Username": "admin_ahmed",
+    "Email": "ahmed@blog.com",
+    "PasswordHash": "AQAAAAIAAYagAAAAE...",
+    "Role": "Admin"
+  },
+  {
+    "Id": 2,
+    "Username": "editor_sara",
+    "Email": "sara@blog.com",
+    "PasswordHash": "AQAAAAIAAYagAAAAF...",
+    "Role": "Editor"
+  },
+  {
+    "Id": 3,
+    "Username": "editor_omar",
+    "Email": "omar@blog.com",
+    "PasswordHash": "AQAAAAIAAYagAAAAG...",
+    "Role": "Editor"
+  },
+  {
+    "Id": 4,
+    "Username": "reader_mona",
+    "Email": "mona@blog.com",
+    "PasswordHash": "AQAAAAIAAYagAAAAH...",
+    "Role": "Reader"
+  },
+  {
+    "Id": 5,
+    "Username": "reader_ali",
+    "Email": "ali@blog.com",
+    "PasswordHash": "AQAAAAIAAYagAAAAI...",
+    "Role": "Reader"
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "Id": 1,
+    "Title": "Getting Started with ASP.NET Core",
+    "Content": "ASP.NET Core is a cross-platform framework for building modern web applications...",
+    "AuthorId": 1,
+    "CategoryId": 2,
+    "Status": "Published",
+    "CreatedAt": "2024-01-10T09:00:00",
+    "UpdatedAt": "2024-01-10T09:00:00"
+  },
+  {
+    "Id": 2,
+    "Title": "Entity Framework Core Best Practices",
+    "Content": "In this post we will explore the best practices when using EF Core...",
+    "AuthorId": 2,
+    "CategoryId": 2,
+    "Status": "Published",
+    "CreatedAt": "2024-02-05T10:30:00",
+    "UpdatedAt": "2024-02-06T08:00:00"
+  },
+  {
+    "Id": 3,
+    "Title": "Building RESTful APIs with .NET",
+    "Content": "REST APIs are the backbone of modern applications. Let us see how to build one...",
+    "AuthorId": 2,
+    "CategoryId": 1,
+    "Status": "Published",
+    "CreatedAt": "2024-03-01T11:00:00",
+    "UpdatedAt": "2024-03-01T11:00:00"
+  },
+  {
+    "Id": 4,
+    "Title": "UI Design Principles for Developers",
+    "Content": "Even as a developer, understanding basic UI design principles will make your apps better...",
+    "AuthorId": 3,
+    "CategoryId": 3,
+    "Status": "Draft",
+    "CreatedAt": "2024-03-15T14:00:00",
+    "UpdatedAt": "2024-03-15T14:00:00"
+  },
+  {
+    "Id": 5,
+    "Title": "SQL Performance Tips",
+    "Content": "Slow queries can kill your application performance. Here are some tips to speed things up...",
+    "AuthorId": 1,
+    "CategoryId": 2,
+    "Status": "Archived",
+    "CreatedAt": "2023-12-01T08:00:00",
+    "UpdatedAt": "2024-01-01T08:00:00"
+  }
+]
