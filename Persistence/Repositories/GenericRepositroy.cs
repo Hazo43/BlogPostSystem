@@ -32,7 +32,7 @@ namespace Persistence.Repositories
             : await _dbContext.Set<TEntity>().ToListAsync();
 
         public async Task<TEntity?> GetByIdAsync(TKey id)
-      
+
            => await _dbContext.Set<TEntity>().FindAsync(id);
         
 
