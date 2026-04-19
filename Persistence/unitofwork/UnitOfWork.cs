@@ -2,11 +2,6 @@
 using Domain.Interfaces;
 using Persistence.Data.DbContexts;
 using Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence.unitofwork
 {
@@ -22,13 +17,13 @@ namespace Persistence.unitofwork
         {
             // get Entity => BlogPost
             var entryTypeOfKey = typeof(TEntity).Name;
-           
+
             // روح اعملو واحده جديده Entity لو مش بيحتوي علي
-            if (! _repository.ContainsKey(entryTypeOfKey))
+            if (!_repository.ContainsKey(entryTypeOfKey))
                 _repository[entryTypeOfKey] = new GenericRepositroy<TEntity, TKey>(_dbContext);
 
             // Entity لو بيحتوي روح رجعهلو ال
-            return (IGenericRepositroy<TEntity , TKey>) _repository[entryTypeOfKey];
+            return (IGenericRepositroy<TEntity, TKey>)_repository[entryTypeOfKey];
         }
 
         public async Task<int> SaveChanges()
