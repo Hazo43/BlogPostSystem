@@ -3,6 +3,7 @@ using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data.DataSeeding;
 using Persistence.Data.DbContexts;
+using Service.MappingProfile;
 using System.Threading.Tasks;
 
 namespace BlogPost
@@ -28,7 +29,8 @@ namespace BlogPost
             });
             // DataSeeding
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
-            
+            // AutoMapper 
+            builder.Services.AddAutoMapper(cfg => { }, typeof(BlogPostProfile).Assembly);
 
             #endregion
             var app = builder.Build();

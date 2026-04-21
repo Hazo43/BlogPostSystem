@@ -10,5 +10,6 @@
         public string Status { get; set; } = string.Empty;
         public string Category { get; set; } = string.Empty;
         public string AuthorName { get; set; } = string.Empty;
+        public List<string> Tags { get; set; } = new();
     }
 }
