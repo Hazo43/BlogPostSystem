@@ -2,11 +2,6 @@
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data.DbContexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence.Repositories
 {
@@ -19,15 +14,15 @@ namespace Persistence.Repositories
             _dbContext = dbContext;
         }
         public async Task AddAsync(TEntity entity)
-           =>  await _dbContext.AddAsync(entity);
-        
+           => await _dbContext.AddAsync(entity);
+
 
         public void Delete(TEntity entity)
-            =>  _dbContext.Set<TEntity>().Remove(entity);
+            => _dbContext.Set<TEntity>().Remove(entity);
 
         // Delete OR Update OR Add دي مش بتخليها تتبع التغيرات ولا تتبع البيانات اللي جايه من الداتا بيز ومش هيعدل من هنا لازم لو هيعدل يعدل من  asNoTracking
         public async Task<IEnumerable<TEntity>> GetAllAsync(bool asNoTracing = false)
-        => asNoTracing 
+        => asNoTracing
             ? await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync()
             : await _dbContext.Set<TEntity>().ToListAsync();
 
@@ -35,16 +30,16 @@ namespace Persistence.Repositories
         public async Task<TEntity?> GetByIdAsync(TKey id)
 
            => await _dbContext.Set<TEntity>().FindAsync(id);
-      
+
 
         public void Update(TEntity entity)
-          =>  _dbContext.Set<TEntity>().Update(entity);
+          => _dbContext.Set<TEntity>().Update(entity);
 
         #region Specifications
 
         public async Task<IEnumerable<TEntity>> GetAllAsync(ISpecifications<TEntity, TKey> specifications)
         {
-            return await SpecificationsEvaluator.CrateQuery( _dbContext.Set<TEntity>(), specifications).ToListAsync();
+            return await SpecificationsEvaluator.CrateQuery(_dbContext.Set<TEntity>(), specifications).ToListAsync();
         }
         public async Task<TEntity?> GetByIdAsync(ISpecifications<TEntity, TKey> specifications)
         {
@@ -52,6 +47,7 @@ namespace Persistence.Repositories
         }
 
         #endregion
+
 
     }
 }

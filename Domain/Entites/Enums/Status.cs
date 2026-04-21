@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Entites.Enums
+﻿namespace Domain.Entites.Enums
 {
     public enum Status
     {
@@ -12,5 +6,4 @@ namespace Domain.Entites.Enums
         Draft = 1,
         Archived = 2
     }
-
 }
