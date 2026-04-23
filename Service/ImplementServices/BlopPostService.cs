@@ -43,6 +43,7 @@ namespace Service.ImplementServices
             await _unitOfWork.GetRepository<BlogPost, int>().AddAsync(post);
             // save
             await _unitOfWork.SaveChanges();
+
             // map from BlogPost To BlogPostResultDTO
             return _mapper.Map<BlogPostResultDTO>(post);
         }
