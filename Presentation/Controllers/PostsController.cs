@@ -32,7 +32,7 @@ namespace Presentation.Controllers
 
         // Post => BaseUrl/api/Post
         [HttpPost]
-        public async Task<ActionResult<BlogPostResultDTO>> CreatePostAsync(BlogPostRequestDTO blogPost)
+        public async Task<ActionResult<BlogPostResultDTO>> CreatePostAsync([FromBody]BlogPostRequestDTO blogPost)
         {
             var result = await _postService.CreateAsync(blogPost);
             return Ok(result);

@@ -44,6 +44,11 @@ namespace Service.ImplementServices
             // save
             await _unitOfWork.SaveChanges();
 
+            // database من ال (Tag , User , Category) بتاع ال Include عملنا دي عشان يجيب كل ال
+            var spec = new BlogPostWithCategoryAndStatus(post.Id);
+
+            var createdPost = await _unitOfWork.GetRepository<BlogPost, int>().GetByIdAsync(spec);
+           
             // map from BlogPost To BlogPostResultDTO
             return _mapper.Map<BlogPostResultDTO>(post);
         }
