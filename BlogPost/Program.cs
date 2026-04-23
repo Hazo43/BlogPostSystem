@@ -37,7 +37,8 @@ namespace BlogPost
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             // IBlogPostService
             builder.Services.AddScoped<IBlopPostService, BlopPostService>();
-            
+            // CommentService
+            builder.Services.AddScoped<ICommentService, CommentService>();
 
             #endregion
 

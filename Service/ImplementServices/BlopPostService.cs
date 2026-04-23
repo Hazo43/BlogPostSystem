@@ -5,13 +5,7 @@ using Domain.Interfaces;
 using Service.Specifications;
 using ServiceAbstraction;
 using ServiceAbstraction.Interfaces;
-using Shared;
 using Shared.DTOs.BlogPostModule;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.ImplementServices
 {
@@ -20,14 +14,14 @@ namespace Service.ImplementServices
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public BlopPostService(IUnitOfWork unitOfWork , IMapper mapper)
+        public BlopPostService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
         public async Task<BlogPostResultDTO> CreateAsync(BlogPostRequestDTO blogDto)
         {
-         
+
             // create 
             var post = new BlogPost
             {
@@ -41,14 +35,14 @@ namespace Service.ImplementServices
                 BlogPostTags = blogDto.TagIds.Select(tagId => new BlogPostTag
                 {
                     TagId = tagId
-                
+
                 }).ToList(),
 
             };
             // Add
-            await _unitOfWork.GetRepository<BlogPost , int>().AddAsync(post);
+            await _unitOfWork.GetRepository<BlogPost, int>().AddAsync(post);
             // save
-            await  _unitOfWork.SaveChanges();
+            await _unitOfWork.SaveChanges();
             // map from BlogPost To BlogPostResultDTO
             return _mapper.Map<BlogPostResultDTO>(post);
         }
@@ -56,38 +50,38 @@ namespace Service.ImplementServices
         public async Task<bool> DeleteAsync(int postId)
         {
             var Repo = _unitOfWork.GetRepository<BlogPost, int>();
-          
+
             var post = await Repo.GetByIdAsync(postId);
-            if(post == null) 
+            if (post == null)
                 return false;
 
             Repo.Delete(post);
-           
+
             await _unitOfWork.SaveChanges();
-           
+
             return true;
         }
 
         public async Task<IEnumerable<BlogPostResultDTO>> GetAllAsync(BlogPostSpecificationParameter parameter)
         {
             var specification = new BlogPostWithCategoryAndStatus(parameter);
-            var Posts = await _unitOfWork.GetRepository<BlogPost , int>().GetAllAsync(specification);
+            var Posts = await _unitOfWork.GetRepository<BlogPost, int>().GetAllAsync(specification);
             return _mapper.Map<IEnumerable<BlogPostResultDTO>>(Posts);
         }
 
         public async Task<BlogPostResultDTO?> GetByIdAsync(int postId)
         {
-           var specification = new BlogPostWithCategoryAndStatus(postId);
-           var post = await _unitOfWork.GetRepository<BlogPost , int>().GetByIdAsync(specification);
-           if(post == null)
+            var specification = new BlogPostWithCategoryAndStatus(postId);
+            var post = await _unitOfWork.GetRepository<BlogPost, int>().GetByIdAsync(specification);
+            if (post == null)
                 return null;
 
-           return _mapper.Map<BlogPostResultDTO>(post);
+            return _mapper.Map<BlogPostResultDTO>(post);
         }
 
         public async Task<BlogPostResultDTO> UpdateAsync(int postId, UpdateBlogPostDTO blogDTO)
         {
-         
+
             var post = await _unitOfWork.GetRepository<BlogPost, int>().GetByIdAsync(postId);
 
             if (post is null)
