@@ -11,9 +11,10 @@ namespace Service.Specifications
             base(b => (!parameter.CategoryId.HasValue || b.CategoryId == parameter.CategoryId) &&
                        (!parameter.Status.HasValue || b.Status == parameter.Status))
         {
-            AddInclude(b => b.CategoryId);
-            AddInclude(b => b.AuthorId);
-            AddInclude(b => b.BlogPostTags);
+            AddInclude(b => b.Category);
+            AddInclude(b => b.User);
+            AddInclude(x => x.BlogPostTags);
+            AddInclude("BlogPostTags.Tag");
 
             switch (parameter.Sort)
             {
@@ -45,9 +46,10 @@ namespace Service.Specifications
         // Get By Id 
         public BlogPostWithCategoryAndStatus(int id) : base(b => b.Id == id)
         {
-            AddInclude(b => b.CategoryId);
-            AddInclude(b => b.AuthorId);
+            AddInclude(b => b.Category);
+            AddInclude(b => b.User);
             AddInclude(b => b.BlogPostTags);
+            AddInclude("BlogPostTags.Tag");
         }
     }
 }

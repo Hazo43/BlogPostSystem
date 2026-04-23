@@ -12,10 +12,16 @@ namespace Domain.Interfaces
     {
         // where
         public Expression<Func<TEntity , bool>>? Criteria {  get; }
+       
         // Include
         public List<Expression<Func<TEntity , object>>> IncludeExpression { get; }
+       
+        // IncludeStrings => IncludeThen دي زي 
+        public List<string> IncludeStrings { get; }
+       
         // OrderBy
         public Expression<Func<TEntity, object>> OrderBy { get;}
+       
         // OrderByDesc
         public Expression<Func<TEntity , object>> OrderByDesc { get;}
    

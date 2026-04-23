@@ -3,8 +3,10 @@ using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data.DataSeeding;
 using Persistence.Data.DbContexts;
+using Persistence.unitofwork;
+using Service.ImplementServices;
 using Service.MappingProfile;
-using System.Threading.Tasks;
+using ServiceAbstraction.Interfaces;
 
 namespace BlogPost
 {
@@ -15,9 +17,9 @@ namespace BlogPost
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-         
+
             #region  Add services to the container
-            
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -31,14 +33,22 @@ namespace BlogPost
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
             // AutoMapper 
             builder.Services.AddAutoMapper(cfg => { }, typeof(BlogPostProfile).Assembly);
+            // UnitOfWork
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // IBlogPostService
+            builder.Services.AddScoped<IBlopPostService, BlopPostService>();
+            
 
             #endregion
+
+
+
             var app = builder.Build();
 
             //Pending Migration ÂÌŒ‘ Â‰« »—œÊ ⁄‘«‰ Ì‘Ê› ·Ê ›ÌÂ «Ì  run ﬂ· „« «·«»·ﬂÌ‘‰ Ì⁄„·
             // DataSeed() «··Ì ÃÊ«Â« «·· ÂÌÂ Method Â—ÊÕ «ﬁ—«¡ «·œ« « „‰ «· DataSeeding Ê„‰ «· DataSeeding Ê„‰Â« ÂÊ’· · GetRequiredService<IDataSeeding>() ⁄‘«‰ «Ê’· · Create Scope  »⁄„·
             using var scope = app.Services.CreateScope();
-            var objectOgDataSeed=scope.ServiceProvider.GetRequiredService<IDataSeeding>();
+            var objectOgDataSeed = scope.ServiceProvider.GetRequiredService<IDataSeeding>();
             await objectOgDataSeed.DataSeed();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

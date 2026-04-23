@@ -10,4 +10,11 @@
     <ProjectReference Include="..\ServiceAbstraction\ServiceAbstraction.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App"></FrameworkReference>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NETCore.App" Version="2.2.8" />
+	</ItemGroup>
 </Project>

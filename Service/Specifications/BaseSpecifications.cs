@@ -15,14 +15,20 @@ namespace Service.Specifications
         }
         #endregion
 
-        #region Include 
+        #region Include - IncludeStrings
 
-        public List<Expression<Func<TEntity, object>>> IncludeExpression { get; private set; }
+        public List<Expression<Func<TEntity, object>>> IncludeExpression { get; } = new();
         protected void AddInclude(Expression<Func<TEntity, object>> IncludeExp)
         {
             IncludeExpression.Add(IncludeExp);
         }
 
+    // AddInclude("BlogPostTags.Tag"); هكذا  GetAll and GetById مع ال Include عشان نعملهم  Tags عملناها عشان ال
+        public List<string> IncludeStrings { get; } = new();
+        protected void AddInclude(string includeString)
+        {
+            IncludeStrings.Add(includeString);
+        }
         #endregion
 
         #region Sorting => { OrderBy - OrderByDesc }

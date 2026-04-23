@@ -37,8 +37,15 @@ namespace Persistence
                         (CurrentQuery, IncludeExp) => CurrentQuery.Include(IncludeExp));
                 }
                 
+                // IncludeStrings
+                if (specifications.IncludeStrings is not null && specifications.IncludeStrings.Any())
+                {
+                    query = specifications.IncludeStrings.Aggregate(query,
+                        (CurrentQuery, IncludeStr) => CurrentQuery.Include(IncludeStr));
+                }
+
                 // Paginations 
-                if(specifications.IsPaginated is true) // و عاوز يستخدمها IsPaginated معناها ان هو وصل ل true لو ب
+                if (specifications.IsPaginated is true) // و عاوز يستخدمها IsPaginated معناها ان هو وصل ل true لو ب
                     query = query.Skip(specifications.Skip).Take(specifications.Take);
             }
             return query;
