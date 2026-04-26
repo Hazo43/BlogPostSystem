@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServiceAbstraction;
 using ServiceAbstraction.Interfaces;
 using Shared.DTOs.BlogPostModule;
@@ -31,6 +32,7 @@ namespace Presentation.Controllers
         }
 
         // Post => BaseUrl/api/Post
+        [Authorize(Roles = "Admin,Editor")]
         [HttpPost]
         public async Task<ActionResult<BlogPostResultDTO>> CreatePostAsync([FromBody]BlogPostRequestDTO blogPost)
         {
@@ -39,6 +41,7 @@ namespace Presentation.Controllers
         }
 
         // Put => BaseUrl/api/Post/{id}
+        [Authorize(Roles = "Admin,Editor")]
         [HttpPut("{id}")]
         public async Task<ActionResult<BlogPostResultDTO>> UpdatePostAsync (int id , UpdateBlogPostDTO blogPostDTO )
         {
@@ -47,6 +50,7 @@ namespace Presentation.Controllers
         }
 
         // Delete => BaseUrl/api/Post/{id}
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeletePostByIdAsync(int id)
         {

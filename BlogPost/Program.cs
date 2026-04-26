@@ -45,7 +45,8 @@ namespace BlogPost
             builder.Services.AddScoped<IBlopPostService, BlopPostService>();
             // CommentService
             builder.Services.AddScoped<ICommentService, CommentService>();
-
+            // AuthenticationService
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
             #endregion
 
 
