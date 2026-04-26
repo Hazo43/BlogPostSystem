@@ -57,6 +57,8 @@ namespace BlogPost
             using var scope = app.Services.CreateScope();
             var objectOgDataSeed = scope.ServiceProvider.GetRequiredService<IDataSeeding>();
             await objectOgDataSeed.DataSeed();
+            // Identity DataSeed 
+            await objectOgDataSeed.IdentityDataSeedAsync();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

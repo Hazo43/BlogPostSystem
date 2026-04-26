@@ -1,21 +1,24 @@
 ﻿using Domain.Entites;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data.DbContexts;
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Persistence.Data.DataSeeding
 {
     public class DataSeeding : IDataSeeding
     {
         private readonly BlogDbContext _dbContext;
+        private readonly RoleManager<IdentityRole<int>> _roleManager;
+        private readonly UserManager<User> _userManager;
 
-        public DataSeeding(BlogDbContext dbContext)
+        public DataSeeding(BlogDbContext dbContext, RoleManager<IdentityRole<int>> roleManager,
+                           UserManager<User> userManager)
         {
             _dbContext = dbContext;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         public async Task DataSeed()
@@ -47,7 +50,7 @@ namespace Persistence.Data.DataSeeding
                             await _dbContext.SaveChangesAsync();
                         }
                         await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [Categories] OFF");
-                        
+
                     }
 
                     // Tags
@@ -62,7 +65,7 @@ namespace Persistence.Data.DataSeeding
                             await _dbContext.SaveChangesAsync();
                         }
                         await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [Tags] OFF");
-                        
+
                     }
 
                     // Users
@@ -81,7 +84,7 @@ namespace Persistence.Data.DataSeeding
                             await _dbContext.SaveChangesAsync();
                         }
                         await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [Users] OFF");
-                      
+
                     }
 
                     // BlogPosts
@@ -100,7 +103,7 @@ namespace Persistence.Data.DataSeeding
                             await _dbContext.SaveChangesAsync();
                         }
                         await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [BlogPosts] OFF");
-                      
+
                     }
 
                     // Comments
@@ -115,7 +118,7 @@ namespace Persistence.Data.DataSeeding
                             await _dbContext.SaveChangesAsync();
                         }
                         await _dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [Comments] OFF");
-                       
+
                     }
 
                     // BlogPostTags
@@ -128,10 +131,10 @@ namespace Persistence.Data.DataSeeding
                             await _dbContext.BlogPostTags.AddRangeAsync(blogPostTags);
                             await _dbContext.SaveChangesAsync();
                         }
-                       
+
                     }
 
-                    
+
                 }
                 finally
                 {
@@ -141,6 +144,58 @@ namespace Persistence.Data.DataSeeding
             catch (Exception ex)
             {
                 Console.WriteLine($"❌ Data Seeding Failed : {ex.Message}");
+            }
+        }
+
+        public async Task IdentityDataSeedAsync()
+        {
+            try
+            {
+                if (!_roleManager.Roles.Any())
+                {
+                    await _roleManager.CreateAsync(new IdentityRole<int> { Name = "Admin" });
+                    await _roleManager.CreateAsync(new IdentityRole<int> { Name = "Editor" });
+                    await _roleManager.CreateAsync(new IdentityRole<int> { Name = "Reader" });
+
+                }
+
+                if( !_userManager.Users.Any())
+                {
+                    var editor = new User()
+                    {
+                        DisplayName = "Mahmoud",
+                        UserName = "Mahmoud",
+                        Email = "Mahmoud@gmail.com",
+                        PhoneNumber = "01234567855"
+                    };
+                    var admin = new User()
+                    {
+                        DisplayName = "Hazo",
+                        UserName = "Hazo",
+                        Email = "Hazo@gmail.com",
+                        PhoneNumber = "01010882408"
+                    };
+                    var reader = new User()
+                    {
+                        DisplayName = "Mostafa",
+                        UserName = "Mostafa",
+                        Email = "Mostafa@gmail.com",
+                        PhoneNumber = "01202502602"
+                    };
+
+                    await _userManager.CreateAsync(admin, "P@ssw0rd");
+                    await _userManager.CreateAsync(reader, "P@ssw0rd");
+                    await _userManager.CreateAsync(editor, "P@ssw0rd");
+
+                    await _userManager.AddToRoleAsync(admin, "Admin");
+                    await _userManager.AddToRoleAsync(editor, "Editor");
+                    await _userManager.AddToRoleAsync(reader, "Reader");
+                }
+
+            }
+            catch(Exception ex)
+            {
+                throw;
             }
         }
     }
