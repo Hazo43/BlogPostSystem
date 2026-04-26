@@ -11,7 +11,7 @@ namespace Persistence.Data.Configrations
         {
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Username)
+            builder.Property(x => x.UserName)
                    .HasMaxLength(100);
 
             builder.Property(x => x.Email)
@@ -32,10 +32,7 @@ namespace Persistence.Data.Configrations
                    .HasForeignKey(x => x.AuthorId)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            // Enum Role
-            // عادي Enum انما وامن بنرجعهالي رجعها ك string كا Database كدا بقولو خزنها في ال 
-            builder.Property(x => x.Role).HasConversion(
-                             r => r.ToString(), r => Enum.Parse<Role>(r));
+ 
         }
     }
 }

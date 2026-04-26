@@ -1,5 +1,7 @@
 
+using Domain.Entites;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data.DataSeeding;
 using Persistence.Data.DbContexts;
@@ -29,6 +31,10 @@ namespace BlogPost
             {
                 option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            // Identity 
+            builder.Services.AddIdentityCore<User>()
+                   .AddRoles<IdentityRole<int>>() 
+                   .AddEntityFrameworkStores<BlogDbContext>();
             // DataSeeding
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
             // AutoMapper 

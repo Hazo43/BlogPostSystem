@@ -1,9 +1,11 @@
 ﻿using Domain.Entites;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Data.DbContexts
 {
-    public class BlogDbContext : DbContext
+    public class BlogDbContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options)
         {
@@ -12,10 +14,11 @@ namespace Persistence.Data.DbContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Identity عشان ال
+            base.OnModelCreating(modelBuilder);
+          
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AssemblyReference).Assembly);
         }
-
-       public DbSet<User> Users { get; set; }
        public DbSet<BlogPost> BlogPosts { get; set; }
        public DbSet<Tag> Tags { get; set; }
        public DbSet<Comment> Comments { get; set; }

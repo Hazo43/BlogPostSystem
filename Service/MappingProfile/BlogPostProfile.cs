@@ -11,7 +11,7 @@ namespace Service.MappingProfile
             CreateMap<BlogPost, BlogPostResultDTO>()
                      .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString())) // Status -> Enum
                      .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name)) // Category
-                     .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.User.Username)) // User
+                     .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.User.UserName)) // User
                      .ForMember(dest => dest.Tags, opt => opt.MapFrom
                      (src => src.BlogPostTags.Select(bt => bt.Tag.Name).ToList()));                  // Tags
         }

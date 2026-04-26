@@ -1,4 +1,5 @@
 ﻿using Domain.Entites.Enums;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Entites
 {
-    public class User : BaseEntity<int>
+    public class User : IdentityUser<int>
     {
-
-        public string Username { get; set; } = default!;
-        public string Email { get; set; } = default!;
-        public string PasswordHash { get; set; } = default!;
-        public Role Role { get; set; }
+        public string DisplayName { get; set; } = string.Empty;
 
         #region Relations
 

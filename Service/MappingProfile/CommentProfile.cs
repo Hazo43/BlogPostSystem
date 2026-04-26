@@ -14,7 +14,7 @@ namespace Service.MappingProfile
         public CommentProfile()
         {
             CreateMap<Comment, CommentResultDTO>()
-                .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.User.Username))
+                .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.User.UserName))
                 .ForMember(dest => dest.PostTitle, opt => opt.MapFrom(src => src.BlogPost.Title));
      
         }
